@@ -14,10 +14,10 @@ import { useContext } from 'react'
 import { CyclesContext } from '../../contexts/CyclesContext'
 
 const newCycleFormValidationSchema = zod.object({
-  task: zod.string().min(1, 'Informe a tarefa.'),
+  task: zod.string().min(5, 'Informe a tarefa.'),
   minutesAmount: zod
     .number()
-    .min(1, 'A ciclo precisa ser de no mínimo 5 minutos.')
+    .min(5, 'A ciclo precisa ser de no mínimo 5 minutos.')
     .max(60, 'A ciclo precisa ser de no máximo 60 minutos.'),
 })
 
@@ -35,14 +35,19 @@ export function Home() {
     },
   })
 
-  const { handleSubmit, watch /* reset */ } = newCycleForm
+  const { handleSubmit, watch, reset } = newCycleForm
+
+  function handleCreateNewCycle(data: NewCycleFormData) {
+    createNewCicle(data)
+    reset()
+  }
 
   const task = watch('task')
   const isSubmitDisabled = !task
 
   return (
     <HomeContainer>
-      <form onSubmit={handleSubmit(createNewCicle)} action="">
+      <form onSubmit={handleSubmit(handleCreateNewCycle)} action="">
         <FormProvider {...newCycleForm}>
           <NewCicleForm />
         </FormProvider>
