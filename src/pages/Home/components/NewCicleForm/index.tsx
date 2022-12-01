@@ -13,12 +13,12 @@ export function NewCicleForm() {
       <TaskInput
         id="task"
         list="task-sugestions"
-        placeholder="Dê um nome para seu projeto"
+        placeholder= "Dê um nome para seu projeto"
         disabled={!!activeCycle}
         {...register('task')}
       />
 
-      <datalist id="task-sugestions">
+      <datalist id="task-sugestions">        
         <option value="Projeto 1" />
         <option value="Projeto 2" />
         <option value="Projeto 3" />
